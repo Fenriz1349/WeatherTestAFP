@@ -36,19 +36,22 @@ struct ContentView: View {
                     }
                 }
                 .frame(height: 40)
-                ScrollView {
-                    ForEach(filtratedLocations) {location in
-                        NavigationLink(destination: LocationDetail(location: location)) {
-                            LocationRow(location: location)
+                if filtratedLocations.isEmpty {
+                    Text ("Il n'y a pas de villes correspondant à votre rechercher 😔")
+                } else {
+                    ScrollView {
+                        ForEach(filtratedLocations) {location in
+                            NavigationLink(destination: LocationDetail(location: location)) {
+                                LocationRow(location: location)
+                            }
                         }
                     }
                 }
             }
+            .padding(.horizontal)
         }
-        .padding(.horizontal)
     }
 }
-
 #Preview {
     ContentView()
 }
